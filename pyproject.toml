@@ -1,0 +1,36 @@
+[project]
+name = "multi-provider-llm-gateway"
+version = "0.1.0"
+description = "Async multi-provider LLM gateway with streaming telemetry and cost accounting"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=1.66.0",
+    "anthropic>=0.54.0",
+    "pydantic>=2.9.0",
+    "tiktoken>=0.8.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "python-dotenv>=1.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "streamlit>=1.39.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_mode = "auto"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

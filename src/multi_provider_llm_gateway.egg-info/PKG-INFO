@@ -1,0 +1,117 @@
+Metadata-Version: 2.4
+Name: multi-provider-llm-gateway
+Version: 0.1.0
+Summary: Async multi-provider LLM gateway with streaming telemetry and cost accounting
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: openai>=1.66.0
+Requires-Dist: anthropic>=0.54.0
+Requires-Dist: pydantic>=2.9.0
+Requires-Dist: tiktoken>=0.8.0
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: uvicorn>=0.32.0
+Requires-Dist: python-dotenv>=1.0.1
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.24.0; extra == "dev"
+Requires-Dist: streamlit>=1.39.0; extra == "dev"
+
+# Multi-Provider LLM Gateway
+
+A production-oriented Python gateway for streaming responses across OpenAI and Anthropic while normalizing token telemetry and pricing into a single SDK surface.
+
+## Overview
+
+The project exposes a unified `UnifiedLLMGateway` that hides provider-specific differences behind a single async generator API, emits normalized `StreamChunk` events, and calculates live token/cost telemetry in real time.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant FastAPI
+    participant Gateway
+    participant OpenAI
+    participant Anthropic
+
+    User->>Browser: Submit prompt + provider + model
+    Browser->>FastAPI: POST /api/stream
+    FastAPI->>Gateway: stream(prompt, model, provider)
+    Gateway->>OpenAI: chat.completions.create(...)
+    Gateway->>Anthropic: messages.stream(...)
+    OpenAI-->>Gateway: delta chunks + usage metadata
+    Anthropic-->>Gateway: content_block_delta + message_delta
+    Gateway-->>FastAPI: normalized StreamChunk events
+    FastAPI-->>Browser: text/event-stream
+    Browser-->>User: live tokens + telemetry
+```
+
+## Features
+
+- Async streaming with provider-neutral `AsyncGenerator[StreamChunk, None]`
+- Pydantic v2 validation for chunk payloads and telemetry
+- OpenAI and Anthropic support with normalized event parsing
+- Real-time TTFT, tokens/sec, token counts, and cost telemetry
+- Secret-safe error handling and validation for missing API keys
+- FastAPI interface for local streaming demo
+
+## Prerequisites
+
+- Python 3.11+
+- `uv` or `pip`
+- OpenAI API key and/or Anthropic API key
+
+## Setup
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e '.[dev]'
+cp .env.example .env
+```
+
+Then add your API keys in `.env`:
+
+```bash
+OPENAI_API_KEY=your_openai_key_here
+ANTHROPIC_API_KEY=your_anthropic_key_here
+```
+
+## Running the app
+
+```bash
+uvicorn src.app:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Open http://localhost:8000 in a browser.
+
+## Running tests
+
+```bash
+pytest -v
+```
+
+## Pricing matrix
+
+| Provider | Model | Input cost ($/1M tokens) | Output cost ($/1M tokens) |
+| --- | --- | ---: | ---: |
+| OpenAI | gpt-4o | 5.00 | 15.00 |
+| OpenAI | gpt-4o-mini | 0.15 | 0.60 |
+| Anthropic | claude-3-5-sonnet | 3.00 | 15.00 |
+| Anthropic | claude-3-5-haiku | 0.80 | 4.00 |
+
+## Audit and verification summary
+
+The initial AI-generated draft was audited for async misuse, final-chunk parsing problems, and provider-specific telemetry drift. The finalized code resolves these issues by:
+
+- using `AsyncOpenAI` / `AsyncAnthropic` clients only in async execution paths
+- guarding final usage chunks where `choice.delta.content` is `None`
+- handling Anthropic `message_start`, `content_block_delta`, and `message_delta` event types explicitly
+- computing TTFT from the first non-empty delta rather than the network handshake
+- rounding total cost to six decimal places using `Decimal`
+- keeping client instances on the gateway instance instead of reinitializing inside each call
+- sanitizing exceptions to redact API key material before exposing them to logs or the UI
+
+## License
+
+MIT
