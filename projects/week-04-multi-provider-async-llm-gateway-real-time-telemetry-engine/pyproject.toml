@@ -1,0 +1,27 @@
+[project]
+name = "structured-data-extractor"
+version = "0.1.0"
+description = "Resilient unstructured data extraction and Pydantic validation pipeline"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.9.0",
+  "python-dotenv>=1.0.1",
+  "fastapi>=0.115.0",
+  "uvicorn>=0.32.0",
+  "beautifulsoup4>=4.12.0",
+  "pypdf>=4.0.0",
+  "pytest>=8.3.0",
+  "pytest-asyncio>=0.24.0",
+  "streamlit>=1.39.0",
+  "json-repair>=0.4.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_mode = "auto"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

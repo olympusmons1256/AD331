@@ -1,5 +1,34 @@
 # Multi-Provider LLM Gateway
 
+## AD331 course repo layout
+
+This repository is structured to support multiple projects across the AD331 term. Each assignment lives in its own directory under `projects/` so the work stays organized and isolated.
+
+```text
+AD331/
+├── README.md
+├── projects/
+│   ├── README.md
+│   ├── week-03-resilient-unstructured-data-extraction-pydantic-validation-pipelines/
+│   │   ├── README.md
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── notebooks/
+│   └── week-04-multi-provider-async-llm-gateway-real-time-telemetry-engine/
+│       ├── README.md
+│       ├── src/
+│       ├── tests/
+│       └── pyproject.toml
+├── .venv/
+├── .env
+├── pyproject.toml
+└── .git/
+```
+
+This keeps course work organized while reflecting the actual week sequencing used in the repo.
+
+---
+
 A production-oriented Python gateway for streaming responses across OpenAI and Anthropic while normalizing token telemetry and pricing into a single SDK surface.
 
 ## Overview
