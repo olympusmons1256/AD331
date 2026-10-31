@@ -1,0 +1,8 @@
+services:
+  search-workbench:
+    build: .
+    container_name: semantic-search-workbench
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env

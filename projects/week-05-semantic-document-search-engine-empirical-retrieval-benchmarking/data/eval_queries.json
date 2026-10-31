@@ -1,0 +1,122 @@
+[
+  {
+    "query_id": "q01",
+    "query": "default value of maxUnavailable in RollingUpdateDeployment",
+    "query_type": "lexical",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Deployment Controller/RollingUpdateDeployment defaults"
+    ]
+  },
+  {
+    "query_id": "q02",
+    "query": "ECONNRESET in pooled connection",
+    "query_type": "lexical",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Connection Management/Pooled client runtime errors"
+    ]
+  },
+  {
+    "query_id": "q03",
+    "query": "CUSTOM_CONFIG_FLAG_XYZ",
+    "query_type": "lexical",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Configuration Flags/Rare flags"
+    ]
+  },
+  {
+    "query_id": "q04",
+    "query": "maxInFlightBatches default",
+    "query_type": "lexical",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/API Parameters/Batch ingest endpoint"
+    ]
+  },
+  {
+    "query_id": "q05",
+    "query": "retrievalMode parameter values",
+    "query_type": "lexical",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/API Parameters/Search endpoint"
+    ]
+  },
+  {
+    "query_id": "q06",
+    "query": "how to ensure zero downtime rolling upgrades during high traffic",
+    "query_type": "semantic",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Incident Playbooks/Zero-downtime maintenance"
+    ]
+  },
+  {
+    "query_id": "q07",
+    "query": "prevent client socket exhaustion in busy pools",
+    "query_type": "semantic",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Connection Management/Preventing socket starvation in pools"
+    ]
+  },
+  {
+    "query_id": "q08",
+    "query": "how should system react to unstable client networks",
+    "query_type": "semantic",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Incident Playbooks/Network instability response"
+    ]
+  },
+  {
+    "query_id": "q09",
+    "query": "what helps avoid queue collapse during traffic bursts",
+    "query_type": "semantic",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Capacity Engineering/Handling burst load"
+    ]
+  },
+  {
+    "query_id": "q10",
+    "query": "how to diagnose p95 latency regression",
+    "query_type": "semantic",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Capacity Engineering/Latency SLO diagnostics"
+    ]
+  },
+  {
+    "query_id": "q11",
+    "query": "when should lexical search be preferred",
+    "query_type": "semantic",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Search Quality Guidance/Lexical vs semantic retrieval"
+    ]
+  },
+  {
+    "query_id": "q12",
+    "query": "does fixed token chunking split context",
+    "query_type": "semantic",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Search Quality Guidance/Chunking strategy impact"
+    ]
+  },
+  {
+    "query_id": "q13",
+    "query": "control plane responsibilities",
+    "query_type": "lexical",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Architecture Reference/Control plane responsibilities"
+    ]
+  },
+  {
+    "query_id": "q14",
+    "query": "data plane should avoid heavy indexing jobs",
+    "query_type": "semantic",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Architecture Reference/Data plane responsibilities"
+    ]
+  },
+  {
+    "query_id": "q15",
+    "query": "retry pseudocode for timeout and connection reset",
+    "query_type": "semantic",
+    "relevant_section_keys": [
+      "Platform Reliability API Specification/Developer Notes/Retry pseudocode"
+    ]
+  }
+]

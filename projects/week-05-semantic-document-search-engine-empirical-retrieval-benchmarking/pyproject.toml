@@ -1,0 +1,36 @@
+[project]
+name = "semantic-search-benchmarker"
+version = "0.1.0"
+description = "Semantic document search engine with empirical retrieval benchmarking"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.9.0",
+  "chromadb>=0.5.5",
+  "rank-bm25>=0.2.2",
+  "openai>=1.51.0",
+  "tiktoken>=0.8.0",
+  "sentence-transformers>=3.2.0",
+  "numpy>=1.26.0",
+  "pandas>=2.2.0",
+  "fastapi>=0.115.0",
+  "uvicorn>=0.32.0",
+  "python-dotenv>=1.0.1",
+  "pytest>=8.3.0",
+  "pytest-asyncio>=0.24.0",
+  "streamlit>=1.39.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+asyncio_mode = "auto"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
