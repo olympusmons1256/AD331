@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "infrastructure-rag-lab"
+version = "0.1.0"
+description = "Two-stage infrastructure document retrieval workbench"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "chromadb>=0.5.5,<2",
+  "sentence-transformers>=3.2,<6",
+  "torch>=2.2,<3",
+  "streamlit>=1.39,<2",
+  "python-dotenv>=1.0,<2",
+  "ddgs>=9,<10",
+  "openai>=1.51,<3",
+  "tavily-python>=0.5,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src", "src.*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
